@@ -21,14 +21,14 @@ export const fetchGamez = async () => {
 };
 
 export const updateGame = async (updatedGame, id) => {
-  const { name, description, price, image } = updatedGame;
+  const { name, description, price, image, user_id } = updatedGame;
   const SQL = `
         UPDATE gamez
-        SET name = $1, description = $2, price = $3, image = $4
-        WHERE id = $5
+        SET name = $1, description = $2, price = $3, image = $4, user_id = $5
+        WHERE id = $6
         RETURNING *
     `;
-  const response = await client.query(SQL, [name, description, price, image, id]);
+  const response = await client.query(SQL, [name, description, price, image, user_id, id]);
   return response.rows[0];
 };
 
